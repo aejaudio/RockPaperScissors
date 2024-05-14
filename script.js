@@ -1,10 +1,4 @@
-/* Create function getComputerChoice
-Return string values rock, paper, or scissors.
-Use math.random to generate a number between 1 and 3
-use if else statement to equate number with answer
-1 = Rock
-2 = Paper
-3 = Scissors */
+
 function getComputerChoice(){
 let answer = Math.floor(Math.random() * (4-1) + 1);
 let rock = "rock";
@@ -20,120 +14,109 @@ else{
     return scissors;
 }
 }
-/* Create function getHumanChoice
-Use Prompt to get user input */
 
-function getHumanChoice(){
-    let humanAnswer = prompt("Rock, Paper, or Scissors")
-    return humanAnswer;
+function scoreList(winner)
+{
+    const listItem = document.createElement("li");
+    const listText = document.createElement("span");
+    listItem.textContent = winner;
+    list.appendChild(listItem)
+    list.textContent = `Human Score: ${humanScore} Computer Score: ${computerScore}`;
+
 }
-
-/* Create variables humanScore and computerScore
-Initialize variable to 0 */
-
-/* Create playRound function
-Define humanChoice and computerChoice
-Take the variables as arguments
-Make humanSelection case insensitive 
-use if else statements to decide winner
-console.log a winner
-increment humanScore or computerScore */
-
-
-
-let humanSelection = getHumanChoice();
-let computerSelection = getComputerChoice();
-
-/* Create playGame function */
+let humanScore = 0;
+let computerScore = 0;
 
 function playGame(){
-    let humanScore = 0;
-    let computerScore = 0;
-    function playRound(humanChoice, computerChoice){
-        let lowerHumanChoice = humanChoice.toLowerCase();
+
+    let playerSelection = ""
+    let computerChoice = "";
+
+    const rock = document.querySelector("#rock");
+    rock.addEventListener("click", () => {
+        playerSelection = "rock";
+        computerChoice = getComputerChoice();
+        playRound(playerSelection, computerChoice);
+    });
+
+    const paper = document.querySelector("#paper");
+    paper.addEventListener("click", () =>{
+        playerSelection = "paper";
+        computerChoice = getComputerChoice();
+        playRound(playerSelection, computerChoice);
+    });
+    const scissors = document.querySelector("#scissors");
+    scissors.addEventListener("click", () =>{
+        playerSelection = "scissors";
+        computerChoice = getComputerChoice();
+        playRound(playerSelection, computerChoice);
         
-        if (lowerHumanChoice == computerChoice)
-        {
-            console.log("You Tied!")
+    });
+
+    function playRound(playerSelection, computerChoice){
+
+        const results = document.querySelector("#results");
+        const list = document.querySelector("#list");
+        const content = document.querySelector("#content");
+
+        if (humanScore === 5 || computerScore === 5){
+            finalResults(humanScore, computerScore);
         }
-        else if (lowerHumanChoice == "rock" && computerChoice == "paper")
-        {
-            console.log("You lose! Paper beats Rock.")
-            return computerScore+=1;
-        }
-        else if (lowerHumanChoice == "rock" && computerChoice == "scissors")
-        {
-            console.log("You win! Rock beats Scissors.")
-            return humanScore+=1;
-        }
-        else if(lowerHumanChoice == "paper" && computerChoice == "rock")
-        {
-            console.log("You win! Paper beats Rock.")
-            return humanScore+=1;
-        }
-        else if (lowerHumanChoice == "paper" && computerChoice == "scissors")
-        {
-            console.log("You lose! Scissors beats Paper.")
-            return computerScore+=1;
-        }
-        else if (lowerHumanChoice == "scissors" && computerChoice == "paper")
-        {
-            console.log("You win! Scissors beats Paper.")
-            return humanScore+=1;
-        }
-        else if(lowerHumanChoice = "scissors" && computerChoice == "rock")
-        {
-            console.log("You lose! Rock beats Scissors.")
-            return computerScore+=1;
-        }
+        else{
+            if (playerSelection == computerChoice)
+            {
+                content.textContent = "You Tied!";
+                
+            }
+            else if (playerSelection == "rock" && computerChoice == "paper")
+            {
+                content.textContent ="You lose! Paper beats Rock.";
+                return scoreList(computerScore+=1);
+                
+            }
+            else if (playerSelection == "rock" && computerChoice == "scissors")
+            {
+                content.textContent = "You win! Rock beats Scissors.";
+                return scoreList(humanScore+=1);
+            }
+            else if(playerSelection == "paper" && computerChoice == "rock")
+            {
+                content.textContent = "You win! Paper beats Rock.";
+                return scoreList(humanScore+=1);
+            }
+            else if (playerSelection == "paper" && computerChoice == "scissors")
+            {
+                content.textContent = "You lose! Scissors beats Paper.";
+                return scoreList(computerScore+=1);
+            }
+            else if (playerSelection == "scissors" && computerChoice == "paper")
+            {
+                content.textContent = "You win! Scissors beats Paper.";
+                return scoreList(humanScore+=1);
+            }
+            else if(playerSelection = "scissors" && computerChoice == "rock")
+            {
+                content.textContent = "You lose! Rock beats Scissors.";
+                return scoreList(computerScore+=1);
+            }
+        }  
+    }
+   
 }
-humanSelection = getHumanChoice();
-computerSelection = getComputerChoice();
-
-playRound(humanSelection, computerSelection);
-console.log("Your Score: " + humanScore)
-console.log("Computer Score: " + computerScore)
-
-humanSelection = getHumanChoice();
-computerSelection = getComputerChoice();
-
-playRound(humanSelection, computerSelection);
-console.log("Your Score: " + humanScore)
-console.log("Computer Score: " + computerScore)
-
-humanSelection = getHumanChoice();
-computerSelection = getComputerChoice();
-
-playRound(humanSelection, computerSelection);
-console.log("Your Score: " + humanScore)
-console.log("Computer Score: " + computerScore)
-
-humanSelection = getHumanChoice();
-computerSelection = getComputerChoice();
-
-playRound(humanSelection, computerSelection);
-console.log("Your Score: " + humanScore)
-console.log("Computer Score: " + computerScore)
-
-humanSelection = getHumanChoice();
-computerSelection = getComputerChoice();
-
-playRound(humanSelection, computerSelection);
-console.log("Your Score: " + humanScore)
-console.log("Computer Score: " + computerScore)
-if(humanScore == computerScore)
+function finalResults(humanScore, computerScore){
+    if(humanScore == computerScore)
     {
-        console.log("You Tied!")
+        alert("You tied the game!")
     }
     else if (humanScore < computerScore)
     {
-        console.log("You Lost!")
+        alert("You lost the game!")
     }
     else
     {
-        console.log("You Won!")
+        alert("You won the game!")
     }
 }
-
 playGame();
+
 
