@@ -10,11 +10,10 @@ button{
     background-color: #f638d6;
     color: #000000;
     border: 1px solid #000000;
-    height: 50px;
-    width: 200px;
-    padding: 0;
     margin: 50px;
-    font-weight: bold;
+    width: 100px;
+    height: 50px;
+
     
 }
 #content{
@@ -22,4 +21,11 @@ button{
 }
 #list{
     text-align: center;
+}
+.container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 50px;
+    margin-bottom: 50px;
 }
